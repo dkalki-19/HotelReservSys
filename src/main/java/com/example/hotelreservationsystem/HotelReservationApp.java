@@ -24,6 +24,11 @@ public class HotelReservationApp {
         // Print added hotels
         System.out.println("Hotels added:");
         service.getHotels().forEach(System.out::println);
+        
+     // UC2: Find cheapest hotel for given dates
+        Hotel cheapest = service.findCheapestHotel("10Sep2023", "11Sep2023");
+
+        System.out.println("Cheapest Hotel: " + cheapest);
     }
 }
 

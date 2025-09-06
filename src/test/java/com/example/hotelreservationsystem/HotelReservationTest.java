@@ -20,4 +20,16 @@ public class HotelReservationTest {
         assertEquals("Lakewood", service.getHotels().get(0).getName());
         assertEquals(110, service.getHotels().get(0).getWeekdayRate());
     }
+    
+    @Test
+    public void givenDateRange_ShouldReturnCheapestHotel() {
+        HotelReservationService service = new HotelReservationService();
+        service.addHotel(new Hotel("Lakewood", 110));
+        service.addHotel(new Hotel("Bridgewood", 160));
+        service.addHotel(new Hotel("Ridgewood", 220));
+
+        Hotel cheapest = service.findCheapestHotel("10Sep2023", "11Sep2023");
+
+        assertEquals("Lakewood", cheapest.getName());
+    }
 }
