@@ -4,6 +4,7 @@ package com.example.hotelreservationsystem.service;
 
 import com.example.hotelreservationsystem.model.Hotel;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,6 +26,13 @@ public class HotelReservationService {
         return hotels;
     }
     
+ // Helper: check if date is weekend
+    private boolean isWeekend(LocalDate date) {
+        DayOfWeek day = date.getDayOfWeek();
+        return (day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY);
+    }
+    
+    
  // Helper: Parse date strings into LocalDate
     private List<LocalDate> parseDates(String... dates) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMMyyyy", Locale.ENGLISH);
@@ -35,17 +43,27 @@ public class HotelReservationService {
         return parsedDates;
     }
 
-    // UC2: Find cheapest hotel (ignoring weekends for now)
+  
+    
+ // UC3: Calculate total cost for a hotel
+    private int calculateTotalCost(Hotel hotel, List<LocalDate> dates) {
+        int total = 0;
+        for (LocalDate date : dates) {
+            if (isWeekend(date)) {
+                total += hotel.getWeekendRate();
+            } else {
+                total += hotel.getWeekdayRate();
+            }
+        }
+        return total;
+    }
+    
+    
     public Hotel findCheapestHotel(String... dates) {
         List<LocalDate> parsedDates = parseDates(dates);
 
         return hotels.stream()
                 .min(Comparator.comparingInt(hotel -> calculateTotalCost(hotel, parsedDates)))
                 .orElse(null);
-    }
-
-    // UC2: Total cost calculation (weekday only for now)
-    private int calculateTotalCost(Hotel hotel, List<LocalDate> dates) {
-        return dates.size() * hotel.getWeekdayRate();
     }
 }

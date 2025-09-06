@@ -29,6 +29,10 @@ public class HotelReservationApp {
         Hotel cheapest = service.findCheapestHotel("10Sep2023", "11Sep2023");
 
         System.out.println("Cheapest Hotel: " + cheapest);
+        
+     // Find cheapest hotel (UC3) – sample dates
+        Hotel cheapest1 = service.findCheapestHotel("10Sep2023", "11Sep2023", "12Sep2023");
+        System.out.println("Cheapest Hotel: " + cheapest1);
     }
 }
 

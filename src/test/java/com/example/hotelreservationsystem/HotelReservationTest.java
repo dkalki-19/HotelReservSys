@@ -32,4 +32,17 @@ public class HotelReservationTest {
 
         assertEquals("Lakewood", cheapest.getName());
     }
+    
+    @Test
+    public void givenHotels_WhenFindCheapestConsideringWeekend_ShouldReturnCorrectHotel() {
+        HotelReservationService service = new HotelReservationService();
+        service.addHotel(new Hotel("Lakewood", 110, 90));
+        service.addHotel(new Hotel("Bridgewood", 160, 60));
+        service.addHotel(new Hotel("Ridgewood", 220, 150));
+
+        // Weekend included: 9Sep (Sat), 10Sep (Sun), 11Sep (Mon)
+        Hotel cheapest = service.findCheapestHotel("09Sep2023", "10Sep2023", "11Sep2023");
+
+        assertEquals("Bridgewood", cheapest.getName());
+    }
 }
