@@ -45,4 +45,5 @@ public class HotelReservationTest {
 
         assertEquals("Bridgewood", cheapest.getName());
     }
+    
 }

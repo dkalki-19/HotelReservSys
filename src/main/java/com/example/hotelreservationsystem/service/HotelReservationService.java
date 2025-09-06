@@ -59,6 +59,7 @@ public class HotelReservationService {
     }
     
     
+ // UC4: Find cheapest hotel considering weekday + weekend rates
     public Hotel findCheapestHotel(String... dates) {
         List<LocalDate> parsedDates = parseDates(dates);
 
