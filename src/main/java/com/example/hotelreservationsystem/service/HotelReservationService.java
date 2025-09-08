@@ -59,12 +59,14 @@ public class HotelReservationService {
     }
     
     
- // UC4: Find cheapest hotel considering weekday + weekend rates
-    public Hotel findCheapestHotel(String... dates) {
+ // UC6: Find cheapest, break ties using highest rating
+    public Hotel findCheapestBestRatedHotel(String... dates) {
         List<LocalDate> parsedDates = parseDates(dates);
 
         return hotels.stream()
-                .min(Comparator.comparingInt(hotel -> calculateTotalCost(hotel, parsedDates)))
+                .min(Comparator
+                        .comparingInt((Hotel h) -> calculateTotalCost(h, parsedDates))
+                        .thenComparing(Hotel::getRating, Comparator.reverseOrder()))
                 .orElse(null);
     }
 }

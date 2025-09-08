@@ -24,16 +24,7 @@ public class HotelReservationApp {
         // Print added hotels
         System.out.println("Hotels added:");
         service.getHotels().forEach(System.out::println);
-        
-     // UC2: Find cheapest hotel for given dates
-        Hotel cheapest = service.findCheapestHotel("10Sep2023", "11Sep2023");
-
-        System.out.println("Cheapest Hotel: " + cheapest);
-        
-     // Find cheapest hotel (UC3) – sample dates
-        Hotel cheapest1 = service.findCheapestHotel("10Sep2023", "11Sep2023", "12Sep2023");
-        System.out.println("Cheapest Hotel: " + cheapest1);
-        
+           
         HotelReservationService service1 = new HotelReservationService();
 
         // UC4: Adding hotels
@@ -43,12 +34,7 @@ public class HotelReservationApp {
 
         // Print hotels
         System.out.println("Hotels added:");
-        service.getHotels().forEach(System.out::println);
-
-        // UC4: Cheapest hotel considering weekdays + weekends
-        Hotel cheapest2 = service.findCheapestHotel("09Sep2023", "10Sep2023", "11Sep2023"); // Sat, Sun, Mon
-        System.out.println("Cheapest Hotel: " + cheapest2.getName());
-    
+        service.getHotels().forEach(System.out::println);    
         
         HotelReservationService service2 = new HotelReservationService();
 
@@ -60,9 +46,11 @@ public class HotelReservationApp {
         System.out.println("Hotels with Ratings:");
         service.getHotels().forEach(System.out::println);
 
-        // Find cheapest (price only, rating used later in UC6)
-        Hotel cheapest3 = service.findCheapestHotel("09Sep2023", "10Sep2023", "11Sep2023");
-        System.out.println("Cheapest Hotel: " + cheapest.getName() + " (Rating: " + cheapest.getRating() + ")");
+        // UC6: Find cheapest, break ties using rating
+        Hotel bestCheapest = service.findCheapestBestRatedHotel("09Sep2023", "10Sep2023", "11Sep2023");
+        System.out.println("Best Cheapest Hotel: " + bestCheapest.getName() +
+                " | Rating: " + bestCheapest.getRating());
+        
     }
 }
 
