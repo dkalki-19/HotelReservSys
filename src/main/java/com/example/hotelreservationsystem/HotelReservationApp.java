@@ -49,6 +49,20 @@ public class HotelReservationApp {
         Hotel cheapest2 = service.findCheapestHotel("09Sep2023", "10Sep2023", "11Sep2023"); // Sat, Sun, Mon
         System.out.println("Cheapest Hotel: " + cheapest2.getName());
     
+        
+        HotelReservationService service2 = new HotelReservationService();
+
+        // UC5: Adding hotels with ratings
+        service2.addHotel(new Hotel("Lakewood", 110, 90, 3));
+        service2.addHotel(new Hotel("Bridgewood", 160, 60, 4));
+        service2.addHotel(new Hotel("Ridgewood", 220, 150, 5));
+
+        System.out.println("Hotels with Ratings:");
+        service.getHotels().forEach(System.out::println);
+
+        // Find cheapest (price only, rating used later in UC6)
+        Hotel cheapest3 = service.findCheapestHotel("09Sep2023", "10Sep2023", "11Sep2023");
+        System.out.println("Cheapest Hotel: " + cheapest.getName() + " (Rating: " + cheapest.getRating() + ")");
     }
 }
 

@@ -46,4 +46,16 @@ public class HotelReservationTest {
         assertEquals("Bridgewood", cheapest.getName());
     }
     
+    
+    @Test
+    public void givenHotels_WhenAddedWithRatings_ShouldStoreCorrectly() {
+        HotelReservationService service = new HotelReservationService();
+        service.addHotel(new Hotel("Lakewood", 110, 90, 3));
+        service.addHotel(new Hotel("Bridgewood", 160, 60, 4));
+        service.addHotel(new Hotel("Ridgewood", 220, 150, 5));
+
+        assertEquals(3, service.getHotels().size());
+        assertEquals("Ridgewood", service.getHotels().get(2).getName());
+        assertEquals(5, service.getHotels().get(2).getRating());
+    }
 }
