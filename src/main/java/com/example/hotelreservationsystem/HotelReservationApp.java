@@ -46,19 +46,21 @@ public class HotelReservationApp {
         System.out.println("Hotels with Ratings:");
         service.getHotels().forEach(System.out::println);
 
-        // UC6: Find cheapest, break ties using rating
-        Hotel bestCheapest = service.findCheapestBestRatedHotel("09Sep2023", "10Sep2023", "11Sep2023");
-        System.out.println("Best Cheapest Hotel: " + bestCheapest.getName() +
-                " | Rating: " + bestCheapest.getRating());
-        
+    
      // UC7: Find best-rated hotel
         Hotel bestRated = service.findBestRatedHotel();
         System.out.println("Best Rated Hotel: " + bestRated.getName() +
                 " | Rating: " + bestRated.getRating());
-     // UC8: Cheapest Best Rated Hotel
-        Hotel cheapestBest = service.findCheapestBestRatedHotel("09Sep2023", "10Sep2023", "11Sep2023");
-        System.out.println("Cheapest Best Rated Hotel: " + cheapestBest.getName() +
-                " | Rating: " + cheapestBest.getRating());
+
+        
+        // UC9: Cheapest hotel for Regular customer
+        Hotel cheapestRegular = service.findCheapestHotel("Regular", "09Sep2023", "10Sep2023");
+        System.out.println("Cheapest Hotel for Regular Customer: " + cheapestRegular.getName());
+
+        // UC9: Cheapest hotel for Reward customer
+        Hotel cheapestReward = service.findCheapestHotel("Reward", "09Sep2023", "10Sep2023");
+        System.out.println("Cheapest Hotel for Reward Customer: " + cheapestReward.getName());
+ 
     }
 }
 

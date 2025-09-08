@@ -45,14 +45,14 @@ public class HotelReservationService {
 
   
     
- // UC3: Calculate total cost for a hotel
-    private int calculateTotalCost(Hotel hotel, List<LocalDate> dates) {
+    private int calculateTotalCost(Hotel hotel, List<LocalDate> dates, String customerType) {
         int total = 0;
         for (LocalDate date : dates) {
-            if (isWeekend(date)) {
-                total += hotel.getWeekendRate();
-            } else {
-                total += hotel.getWeekdayRate();
+            boolean weekend = isWeekend(date);
+            if (customerType.equalsIgnoreCase("Regular")) {
+                total += weekend ? hotel.getRegularWeekendRate() : hotel.getRegularWeekdayRate();
+            } else if (customerType.equalsIgnoreCase("Reward")) {
+                total += weekend ? hotel.getRewardWeekendRate() : hotel.getRewardWeekdayRate();
             }
         }
         return total;
@@ -65,14 +65,16 @@ public class HotelReservationService {
     }
     
     
- // UC8: Cheapest Best Rated Hotel
-    public Hotel findCheapestBestRatedHotel(String... dates) {
+    // UC9: Cheapest hotel based on customer type
+    public Hotel findCheapestHotel(String customerType, String... dates) {
         List<LocalDate> parsedDates = parseDates(dates);
 
         return hotels.stream()
                 .min(Comparator
-                        .comparingInt((Hotel h) -> calculateTotalCost(h, parsedDates))
+                        .comparingInt((Hotel h) -> calculateTotalCost(h, parsedDates, customerType))
                         .thenComparing(Hotel::getRating, Comparator.reverseOrder()))
                 .orElse(null);
     }
+    
+    
 }

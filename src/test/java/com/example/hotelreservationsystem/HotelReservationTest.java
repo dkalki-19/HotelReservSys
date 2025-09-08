@@ -35,19 +35,6 @@ public class HotelReservationTest {
     }
     
     
-    @Test
-    public void givenHotels_WhenCheapestTie_ShouldReturnHigherRatedHotel() {
-        HotelReservationService service = new HotelReservationService();
-
-        // Two hotels with same weekday/weekend total, but different ratings
-        service.addHotel(new Hotel("Lakewood", 100, 50, 3));
-        service.addHotel(new Hotel("Bridgewood", 100, 50, 4)); // Higher rating
-
-        Hotel result = service.findCheapestBestRatedHotel("09Sep2023", "10Sep2023");
-
-        assertEquals("Bridgewood", result.getName());
-        assertEquals(4, result.getRating());
-    }
     
     
     @Test
@@ -66,16 +53,29 @@ public class HotelReservationTest {
     
     
     @Test
-    public void givenHotels_WhenFindingCheapestBestRated_ShouldReturnCorrectHotel() {
+    public void givenHotels_WhenRegularCustomer_ShouldReturnCheapestHotel() {
         HotelReservationService service = new HotelReservationService();
 
-        service.addHotel(new Hotel("Lakewood", 100, 50, 3));
-        service.addHotel(new Hotel("Bridgewood", 100, 50, 4)); // same cost, higher rating
-        service.addHotel(new Hotel("Ridgewood", 200, 150, 5)); // expensive
+        service.addHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
+        service.addHotel(new Hotel("Bridgewood", 160, 60, 110, 50, 4));
+        service.addHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
 
-        Hotel result = service.findCheapestBestRatedHotel("09Sep2023", "10Sep2023");
+        Hotel result = service.findCheapestHotel("Regular", "09Sep2023", "10Sep2023");
 
-        assertEquals("Bridgewood", result.getName());
-        assertEquals(4, result.getRating());
+        assertEquals("Lakewood", result.getName());
+    }
+
+    @Test
+    public void givenHotels_WhenRewardCustomer_ShouldReturnCheapestHotel() {
+        HotelReservationService service = new HotelReservationService();
+
+        service.addHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
+        service.addHotel(new Hotel("Bridgewood", 160, 60, 110, 50, 4));
+        service.addHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
+
+
+        Hotel result = service.findCheapestHotel("Reward", "09Sep2023", "10Sep2023");
+
+        assertEquals("Ridgewood", result.getName()); // Ridgewood has best reward rates
     }
 }
