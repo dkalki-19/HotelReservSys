@@ -84,6 +84,5 @@ public class HotelReservationTest {
         assertEquals(220, totalCost); // 160 (Fri) + 60 (Sat)
     }
    
-    
    
 }
