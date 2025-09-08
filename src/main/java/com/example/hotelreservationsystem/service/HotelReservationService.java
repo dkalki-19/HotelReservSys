@@ -57,9 +57,15 @@ public class HotelReservationService {
         }
         return total;
     }
+     
+    public Hotel findBestRatedHotel() {
+        return hotels.stream()
+                .max(Comparator.comparingInt(Hotel::getRating))
+                .orElse(null);
+    }
     
     
- // UC6: Find cheapest, break ties using highest rating
+ // UC8: Cheapest Best Rated Hotel
     public Hotel findCheapestBestRatedHotel(String... dates) {
         List<LocalDate> parsedDates = parseDates(dates);
 
@@ -67,12 +73,6 @@ public class HotelReservationService {
                 .min(Comparator
                         .comparingInt((Hotel h) -> calculateTotalCost(h, parsedDates))
                         .thenComparing(Hotel::getRating, Comparator.reverseOrder()))
-                .orElse(null);
-    }
-    
-    public Hotel findBestRatedHotel() {
-        return hotels.stream()
-                .max(Comparator.comparingInt(Hotel::getRating))
                 .orElse(null);
     }
 }

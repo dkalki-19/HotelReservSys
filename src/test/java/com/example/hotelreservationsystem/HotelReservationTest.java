@@ -63,4 +63,19 @@ public class HotelReservationTest {
         assertEquals("Ridgewood", result.getName());
         assertEquals(5, result.getRating());
     }
+    
+    
+    @Test
+    public void givenHotels_WhenFindingCheapestBestRated_ShouldReturnCorrectHotel() {
+        HotelReservationService service = new HotelReservationService();
+
+        service.addHotel(new Hotel("Lakewood", 100, 50, 3));
+        service.addHotel(new Hotel("Bridgewood", 100, 50, 4)); // same cost, higher rating
+        service.addHotel(new Hotel("Ridgewood", 200, 150, 5)); // expensive
+
+        Hotel result = service.findCheapestBestRatedHotel("09Sep2023", "10Sep2023");
+
+        assertEquals("Bridgewood", result.getName());
+        assertEquals(4, result.getRating());
+    }
 }

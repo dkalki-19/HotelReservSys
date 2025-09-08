@@ -55,6 +55,10 @@ public class HotelReservationApp {
         Hotel bestRated = service.findBestRatedHotel();
         System.out.println("Best Rated Hotel: " + bestRated.getName() +
                 " | Rating: " + bestRated.getRating());
+     // UC8: Cheapest Best Rated Hotel
+        Hotel cheapestBest = service.findCheapestBestRatedHotel("09Sep2023", "10Sep2023", "11Sep2023");
+        System.out.println("Cheapest Best Rated Hotel: " + cheapestBest.getName() +
+                " | Rating: " + cheapestBest.getRating());
     }
 }
 
