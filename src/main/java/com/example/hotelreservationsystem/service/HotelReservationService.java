@@ -81,10 +81,30 @@ public class HotelReservationService {
                 .orElse(null);
     }
 
-    // Helper to also fetch total cost
+ // Helper to also fetch total cost
     public int getTotalCost(Hotel hotel, String... dates) {
         List<LocalDate> parsedDates = parseDates(dates);
         return calculateTotalCost(hotel, parsedDates, CustomerType.REWARD);
     }
+    
+ // UC12: Find cheapest best rated hotel for Regular customer using streams
+    public Hotel findCheapestBestRatedHotelForRegular(String... dates) {
+        List<LocalDate> parsedDates = parseDates(dates);
+
+        return hotels.stream()
+                .sorted(Comparator
+                        .comparingInt((Hotel h) -> calculateTotalCost(h, parsedDates, CustomerType.REGULAR))
+                        .thenComparing(Hotel::getRating, Comparator.reverseOrder()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    // Helper for Regular customer total cost
+    public int getTotalCostForRegular(Hotel hotel, String... dates) {
+        List<LocalDate> parsedDates = parseDates(dates);
+        return calculateTotalCost(hotel, parsedDates, CustomerType.REGULAR);
+    }
+    
+    
     
 }

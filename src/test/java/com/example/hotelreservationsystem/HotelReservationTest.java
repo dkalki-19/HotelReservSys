@@ -68,6 +68,21 @@ public class HotelReservationTest {
         assertEquals(140, totalCost); // 100 + 40
     }
 
+    @Test
+    public void givenRegularCustomer_WhenFindingCheapestBestRated_ShouldReturnBridgewood() {
+        HotelReservationService service = new HotelReservationService();
+
+        service.addHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
+        service.addHotel(new Hotel("Bridgewood", 160, 60, 110, 50, 4));
+        service.addHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
+
+        Hotel result = service.findCheapestBestRatedHotelForRegular("11Sep2020", "12Sep2020");
+        int totalCost = service.getTotalCostForRegular(result, "11Sep2020", "12Sep2020");
+
+        assertEquals("Bridgewood", result.getName());
+        assertEquals(4, result.getRating());
+        assertEquals(220, totalCost); // 160 (Fri) + 60 (Sat)
+    }
    
     
    

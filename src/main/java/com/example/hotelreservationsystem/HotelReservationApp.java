@@ -18,13 +18,19 @@ public class HotelReservationApp {
         service.addHotel(new Hotel("Bridgewood", 160, 60, 110, 50, 4));
         service.addHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
 
-        // UC11: Find cheapest best-rated hotel for Reward customer
-        Hotel bestHotel = service.findCheapestBestRatedHotelForReward("11Sep2020", "12Sep2020");
-        int totalCost = service.getTotalCost(bestHotel, "11Sep2020", "12Sep2020");
+        
+        // Add hotels with Regular + Reward rates
+        service.addHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
+        service.addHotel(new Hotel("Bridgewood", 160, 60, 110, 50, 4));
+        service.addHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
 
-        System.out.println("Cheapest Best Rated Hotel for Reward: " 
+        // UC12: Find cheapest best-rated hotel for Regular customer
+        Hotel bestHotel = service.findCheapestBestRatedHotelForRegular("11Sep2020", "12Sep2020");
+        int totalCost = service.getTotalCostForRegular(bestHotel, "11Sep2020", "12Sep2020");
+
+        System.out.println("Cheapest Best Rated Hotel for Regular: " 
                 + bestHotel.getName() + ", Rating: " + bestHotel.getRating() 
-                + ", Total Rates: $" + totalCost);       
+                + ", Total Rates: $" + totalCost);
     }
 }
 
