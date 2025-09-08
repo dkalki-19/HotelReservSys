@@ -89,7 +89,7 @@ public class HotelReservationTest {
 
         Hotel result = service.findBestRatedHotelForRewardCustomer("09Sep2023", "10Sep2023");
 
-        assertEquals("Ridgewood", result.getName());
+        assertEquals("Ridgewood", result.getName());   
         assertEquals(5, result.getRating());
     }
 }
