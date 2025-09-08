@@ -76,5 +76,13 @@ public class HotelReservationService {
                 .orElse(null);
     }
     
+    // UC10 - Find Best Rated Hotel For Reward Customers
+    public Hotel findBestRatedHotelForRewardCustomer(String... dates) {
+    	List<LocalDate> parsedDates = parseDates(dates);
+    	
+    	return hotels.stream()
+    			.max(Comparator.comparingInt(Hotel::getRating))
+    			.orElse(null);
+    }
     
 }

@@ -1,9 +1,6 @@
 package com.example.hotelreservationsystem;
 
-/**
- * Hello world!
- *
- */
+
 import com.example.hotelreservationsystem.model.Hotel;
 import com.example.hotelreservationsystem.service.HotelReservationService;
 
@@ -61,6 +58,11 @@ public class HotelReservationApp {
         Hotel cheapestReward = service.findCheapestHotel("Reward", "09Sep2023", "10Sep2023");
         System.out.println("Cheapest Hotel for Reward Customer: " + cheapestReward.getName());
  
+        // UC10: Find Best Rated Hotel for Reward Customers
+        Hotel bestRatedReward = service.findBestRatedHotelForRewardCustomer("09Sep2023", "10Sep2023");
+        System.out.println("Best Rated Hotel (Reward): " + bestRatedReward.getName() +
+                " | Rating: " + bestRatedReward.getRating());
+        
     }
 }
 
