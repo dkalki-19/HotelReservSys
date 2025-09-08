@@ -13,56 +13,18 @@ public class HotelReservationApp {
 
         HotelReservationService service = new HotelReservationService();
 
-        // Adding sample hotels (UC1)
-        service.addHotel(new Hotel("Lakewood", 110));
-        service.addHotel(new Hotel("Bridgewood", 160));
-        service.addHotel(new Hotel("Ridgewood", 220));
+        // Add hotels with Regular + Reward rates
+        service.addHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
+        service.addHotel(new Hotel("Bridgewood", 160, 60, 110, 50, 4));
+        service.addHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
 
-        // Print added hotels
-        System.out.println("Hotels added:");
-        service.getHotels().forEach(System.out::println);
-           
-        HotelReservationService service1 = new HotelReservationService();
+        // UC11: Find cheapest best-rated hotel for Reward customer
+        Hotel bestHotel = service.findCheapestBestRatedHotelForReward("11Sep2020", "12Sep2020");
+        int totalCost = service.getTotalCost(bestHotel, "11Sep2020", "12Sep2020");
 
-        // UC4: Adding hotels
-        service1.addHotel(new Hotel("Lakewood", 110, 90));
-        service1.addHotel(new Hotel("Bridgewood", 160, 60));
-        service1.addHotel(new Hotel("Ridgewood", 220, 150));
-
-        // Print hotels
-        System.out.println("Hotels added:");
-        service.getHotels().forEach(System.out::println);    
-        
-        HotelReservationService service2 = new HotelReservationService();
-
-        // UC5: Adding hotels with ratings
-        service2.addHotel(new Hotel("Lakewood", 110, 90, 3));
-        service2.addHotel(new Hotel("Bridgewood", 160, 60, 4));
-        service2.addHotel(new Hotel("Ridgewood", 220, 150, 5));
-
-        System.out.println("Hotels with Ratings:");
-        service.getHotels().forEach(System.out::println);
-
-    
-     // UC7: Find best-rated hotel
-        Hotel bestRated = service.findBestRatedHotel();
-        System.out.println("Best Rated Hotel: " + bestRated.getName() +
-                " | Rating: " + bestRated.getRating());
-
-        
-        // UC9: Cheapest hotel for Regular customer
-        Hotel cheapestRegular = service.findCheapestHotel("Regular", "09Sep2023", "10Sep2023");
-        System.out.println("Cheapest Hotel for Regular Customer: " + cheapestRegular.getName());
-
-        // UC9: Cheapest hotel for Reward customer
-        Hotel cheapestReward = service.findCheapestHotel("Reward", "09Sep2023", "10Sep2023");
-        System.out.println("Cheapest Hotel for Reward Customer: " + cheapestReward.getName());
- 
-        // UC10: Find Best Rated Hotel for Reward Customers
-        Hotel bestRatedReward = service.findBestRatedHotelForRewardCustomer("09Sep2023", "10Sep2023");
-        System.out.println("Best Rated Hotel (Reward): " + bestRatedReward.getName() +
-                " | Rating: " + bestRatedReward.getRating());
-        
+        System.out.println("Cheapest Best Rated Hotel for Reward: " 
+                + bestHotel.getName() + ", Rating: " + bestHotel.getRating() 
+                + ", Total Rates: $" + totalCost);       
     }
 }
 
