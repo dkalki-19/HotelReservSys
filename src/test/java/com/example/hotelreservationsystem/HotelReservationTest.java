@@ -48,4 +48,19 @@ public class HotelReservationTest {
         assertEquals("Bridgewood", result.getName());
         assertEquals(4, result.getRating());
     }
+    
+    
+    @Test
+    public void givenHotels_WhenFindingBestRated_ShouldReturnHighestRatedHotel() {
+        HotelReservationService service = new HotelReservationService();
+
+        service.addHotel(new Hotel("Lakewood", 110, 90, 3));
+        service.addHotel(new Hotel("Bridgewood", 160, 60, 4));
+        service.addHotel(new Hotel("Ridgewood", 220, 150, 5)); // Highest rating
+
+        Hotel result = service.findBestRatedHotel();
+
+        assertEquals("Ridgewood", result.getName());
+        assertEquals(5, result.getRating());
+    }
 }

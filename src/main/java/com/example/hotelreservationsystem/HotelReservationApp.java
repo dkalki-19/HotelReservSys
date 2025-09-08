@@ -51,6 +51,10 @@ public class HotelReservationApp {
         System.out.println("Best Cheapest Hotel: " + bestCheapest.getName() +
                 " | Rating: " + bestCheapest.getRating());
         
+     // UC7: Find best-rated hotel
+        Hotel bestRated = service.findBestRatedHotel();
+        System.out.println("Best Rated Hotel: " + bestRated.getName() +
+                " | Rating: " + bestRated.getRating());
     }
 }
 

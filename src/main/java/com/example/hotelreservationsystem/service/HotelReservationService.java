@@ -69,4 +69,10 @@ public class HotelReservationService {
                         .thenComparing(Hotel::getRating, Comparator.reverseOrder()))
                 .orElse(null);
     }
+    
+    public Hotel findBestRatedHotel() {
+        return hotels.stream()
+                .max(Comparator.comparingInt(Hotel::getRating))
+                .orElse(null);
+    }
 }
